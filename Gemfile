@@ -6,11 +6,23 @@ ruby "3.4.8"
 gem "rails", "~> 7.1.2"
 
 # шаблонизатор Slim для view
-gem 'slim-rails'
+#gem 'slim-rails'
 
 # sass стили
 gem 'sassc-rails'
 
+# Haml для view 
+gem 'haml-rails', '~> 2.0'
+
+gem 'jquery-rails'
+gem 'bootstrap-sass', '~> 3.3.7'
+gem 'font-awesome-rails', '~> 4.7'
+gem 'jquery-ui-rails'
+
+gem 'turbolinks', '~> 5.2.0'
+
+
+gem 'kaminari'
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
@@ -53,6 +65,9 @@ gem "bootsnap", require: false
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]
+  gem 'byebug'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 group :development do
