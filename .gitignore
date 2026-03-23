@@ -44,3 +44,6 @@
 /log/*.log
 /tmp/
 /storage/
+
+#пароли к бд
+/config/secrets.yml

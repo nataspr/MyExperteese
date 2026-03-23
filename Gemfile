@@ -21,6 +21,12 @@ gem 'jquery-ui-rails'
 
 gem 'turbolinks', '~> 5.2.0'
 
+# Для работы с паролями
+gem 'bcrypt'
+# Для сериализации JSON-ответов (опционально)
+gem 'active_model_serializers'
+# Для сброса счётчиков PK (полезно при тестах)
+gem 'activerecord-reset-pk-sequence'
 
 gem 'kaminari'
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
