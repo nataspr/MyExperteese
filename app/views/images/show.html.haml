@@ -1,0 +1,22 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @image.name
+%p
+  %b File:
+  = @image.file
+%p
+  %b Image:
+  %br
+  = image_tag(@image.file, style: "width: 80%; height: auto;") if @image.file.present?
+%p
+  %b Ave value:
+  = @image.ave_value
+%p
+  %b Theme:
+  = @image.theme_id
+
+= link_to 'Edit', edit_image_path(@image)
+\|
+= link_to 'Back', images_path
