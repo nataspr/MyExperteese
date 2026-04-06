@@ -1,0 +1,18 @@
+// Скрываем кнопки навигации и диагностические блоки
+$('.image .image_display .image_diag').css({"display": "none"});
+$('.img-left-side').css({"display": "none"});
+$('.img-right-side').css({"display": "none"});
+
+// Обработчик клика вне области выбора темы – скрывает форму и возвращает кнопку
+$(document).click(function(e){
+  if($(e.target).is(".select_theme") || $(e.target).closest(".select_theme").length) {
+    console.log("In doc.click = INSIDE content area");
+  } else {
+    console.log("In doc.click = OUTSIDE content area");
+    $('.form_select').css({"display": "none"});
+    $('.select_theme').empty().html("<%= j render 'work/button_theme_select' %>");
+  }
+});
+
+// Заменяем кнопку на форму выбора темы
+$('.select_theme').empty().html("<%= j render 'choose_theme_from_arr' %>");

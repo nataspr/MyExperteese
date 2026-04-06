@@ -56,3 +56,47 @@ footer {
     text-align: center;
   }
 }
+
+
+.img-left-side, .img-right-side {
+  cursor: pointer;
+  text-align: center;
+  font-size: 2em;
+  color: #5a2d8c;
+  &:hover {
+    color: #3b1a5e;
+  }
+}
+
+.img-center img {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 5px;
+  background-color: #f9f9f9;
+}
+
+.select_theme button {
+  background-color: #5a2d8c;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  a {
+    color: white;
+    text-decoration: none;
+  }
+}
+
+.form_select {
+  margin-top: 10px;
+  select {
+    padding: 5px;
+    border-radius: 4px;
+  }
+}
+
+.up-theme, .up {
+  margin-top: 0;
+  padding-top: 10px;
+}

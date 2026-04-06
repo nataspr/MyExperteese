@@ -1,9 +1,14 @@
 Rails.application.routes.draw do
+# Work area
+match 'work',          to: 'work#index',          via: 'get'
+match 'choose_theme',  to: 'work#choose_theme',   via: :get
+match 'display_theme', to: 'work#display_theme',  via: :post
   resources :values
   resources :images
   resources :themes
   resources :users
-  root 'main#index'
+  #root 'main#index' ВРЕМЕННО
+  root 'work#index'
   get 'main/index'
   get 'main/help'
   get 'main/contacts'
