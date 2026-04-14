@@ -1,18 +1,21 @@
-// Скрываем кнопки навигации и диагностические блоки
-$('.image .image_display .image_diag').css({"display": "none"});
+// Этот JS.ERB выполняется после ответа от choose_theme.
+// Он заменяет кнопку выбора темы на выпадающий список (форму) и добавляет глобальный обработчик клика. 
+
+// Скрываем кнопки навигации пока не выбрана тема
 $('.img-left-side').css({"display": "none"});
 $('.img-right-side').css({"display": "none"});
 
-// Обработчик клика вне области выбора темы – скрывает форму и возвращает кнопку
+// Обработчик клика вне области выбора темы
 $(document).click(function(e){
   if($(e.target).is(".select_theme") || $(e.target).closest(".select_theme").length) {
     console.log("In doc.click = INSIDE content area");
   } else {
     console.log("In doc.click = OUTSIDE content area");
+    // при клике вне формв - скрыть ее и восстановить кнопку
     $('.form_select').css({"display": "none"});
     $('.select_theme').empty().html("<%= j render 'work/button_theme_select' %>");
   }
 });
 
-// Заменяем кнопку на форму выбора темы
+// Заменяем кнопку на форму выбора темы (партиал _choose_theme_from_arr)
 $('.select_theme').empty().html("<%= j render 'choose_theme_from_arr' %>");

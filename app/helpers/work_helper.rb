@@ -1,4 +1,4 @@
-module WorkHelper
+module WorkHelper # Хелпер для подготовки данных изображения к передаче в JavaScript.
     def image_data(theme, data)
     {
       values_qty: data[:values_qty],
@@ -12,7 +12,8 @@ module WorkHelper
       file: data[:file],
       user_valued: data[:user_valued],
       value: data[:value],
-      common_ave_value: data[:common_ave_value]
+      common_ave_value: data[:common_ave_value],
+      image_url: data[:image_url] # Готовый URL для отображения картинки
     }
   end
 end

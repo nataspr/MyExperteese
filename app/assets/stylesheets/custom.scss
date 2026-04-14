@@ -100,3 +100,13 @@ footer {
   margin-top: 0;
   padding-top: 10px;
 }
+
+select#theme {
+  margin-bottom: 20px;   /* Отступ снизу, чтобы не слипалось с h2.up-theme */
+  margin-right: 20px;
+  display: block;
+  width: 100%;           /* На всю ширину родительского блока */
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
