@@ -13,6 +13,10 @@ match 'display_theme', to: 'work#display_theme',  via: :post
   get 'main/help'
   get 'main/contacts'
   get 'main/about'
+  namespace :api do
+    get 'next_image', to: 'api#next_image'
+    get 'prev_image', to: 'api#prev_image'
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

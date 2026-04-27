@@ -38,3 +38,59 @@ $('.image_display h2.up').append().html(oneImageName);
 
 // Отображаем изображение
 $(".img-center").html('<img alt="Selected Image" src="' + pathImage + '" style="width:100%; height:auto;" title="Selected image"/>');
+
+// РАБОТА №6 ПЕРЕЛИСТЫВАНИЕ ИЗОБРАЖЕНИЙ ПО ТЕМАМ
+// Сохранить текущий индекс и параметры темы в data-атрибуты
+$('.image_display').data('current-index', <%= @image_data[:index] %>);
+$('.image_display').data('theme-id', <%= @image_data[:theme_id] %>);
+$('.image_display').data('images-count', <%= @image_data[:images_arr_size] %>);
+
+// Функция обновления интерфейса после ответа API
+function updateImageDisplay(data) {
+  $('.image_display h2.up').html(data.name);
+  $(".img-center").html('<img alt="Selected Image" src="' + data.image_url + '" style="width:100%; height:auto;" title="Selected image"/>');
+  $('.image_display').data('current-index', data.new_image_index);
+  $('.image_display').data('current-image-id', data.image_id);
+  // При необходимости обновление средней оценки
+  if (data.common_ave_value) {
+    $('.common_ave_value').html(data.common_ave_value);
+  }
+}
+
+// Обработчик кнопки "Вправо"
+$('.img-right-side').off('click').on('click', function() {
+  var currentIndex = $('.image_display').data('current-index');
+  var themeId = $('.image_display').data('theme-id');
+  var imagesCount = $('.image_display').data('images-count');
+
+  $.ajax({
+    type: "GET",
+    url: "/api/next_image",
+    data: { index: currentIndex, theme_id: themeId, length: imagesCount },
+    dataType: 'json'
+  }).done(function(data) {
+    console.log(data.notice);
+    updateImageDisplay(data);
+  }).fail(function(xhr) {
+    console.log("Ошибка: " + xhr.responseText);
+  });
+});
+
+// Обработчик кнопки "Влево"
+$('.img-left-side').off('click').on('click', function() {
+  var currentIndex = $('.image_display').data('current-index');
+  var themeId = $('.image_display').data('theme-id');
+  var imagesCount = $('.image_display').data('images-count');
+
+  $.ajax({
+    type: "GET",
+    url: "/api/prev_image",
+    data: { index: currentIndex, theme_id: themeId, length: imagesCount },
+    dataType: 'json'
+  }).done(function(data) {
+    console.log(data.notice);
+    updateImageDisplay(data);
+  }).fail(function(xhr) {
+    console.log("Ошибка: " + xhr.responseText);
+  });
+});
