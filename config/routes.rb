@@ -7,12 +7,17 @@ match 'display_theme', to: 'work#display_theme',  via: :post
   resources :images
   resources :themes
   resources :users
-  #root 'main#index' ВРЕМЕННО
-  root 'work#index'
+  root 'main#index' #ВРЕМЕННО
+  #root 'work#index'
   get 'main/index'
   get 'main/help'
   get 'main/contacts'
   get 'main/about'
+  # Аутентификация
+  get    'signup',  to: 'users#new'
+  get    'signin',  to: 'sessions#new'
+  post   'signin',  to: 'sessions#create'
+  delete 'signout', to: 'sessions#destroy'
   namespace :api do
     get 'next_image', to: 'api#next_image'
     get 'prev_image', to: 'api#prev_image'

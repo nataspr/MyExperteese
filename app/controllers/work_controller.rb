@@ -1,4 +1,7 @@
 class WorkController < ApplicationController
+
+  before_action :require_login, except: []
+
   include WorkImage
   include WorkHelper
   # Главная страница рабочей области. Устанавливает начальные значения:
@@ -74,7 +77,13 @@ class WorkController < ApplicationController
 
   private
 
-  def current_user
-    @current_user ||= User.first || User.create!(name: "Guest", email: "guest@example.com") # На время разработки используется первый пользователь из базы
+  def require_login
+    unless signed_in?
+      redirect_to signin_path, alert: "Пожалуйста, зарегистрируйтесь для работы."
+    end
   end
+
+  # def current_user
+  #   @current_user ||= User.first || User.create!(name: "Guest", email: "guest@example.com") # На время разработки используется первый пользователь из базы
+  # end
 end

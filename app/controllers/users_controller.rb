@@ -25,7 +25,9 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: "User was successfully created." }
+        # Автоматический вход после регистрации
+        sign_in @user
+        format.html { redirect_to work_url, notice: "Добро пожаловать! Регистрация прошла успешно." }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -64,7 +66,8 @@ class UsersController < ApplicationController
     end
 
     # Only allow a list of trusted parameters through.
+    # Добавлены :password и :password_confirmation
     def user_params
-      params.require(:user).permit(:name, :email)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
 end

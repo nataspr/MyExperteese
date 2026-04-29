@@ -7,10 +7,17 @@
           %li= message
 
   .field
-    = f.label :name
-    = f.text_field :name
+    = f.label :name, "Имя"
+    = f.text_field :name, class: 'form-control'
   .field
-    = f.label :email
-    = f.text_field :email
+    = f.label :email, "Email"
+    = f.email_field :email, class: 'form-control'
+  .field
+    = f.label :password, "Пароль"
+    = f.password_field :password, class: 'form-control'
+  .field
+    = f.label :password_confirmation, "Подтверждение пароля"
+    = f.password_field :password_confirmation, class: 'form-control'
+
   .actions
-    = f.submit 'Save'
+    = f.submit "Создать аккаунт", class: "btn btn-primary"
