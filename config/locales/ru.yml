@@ -1,0 +1,41 @@
+ru:
+  shared:
+    header:
+      logo_title: "MyApp на Ruby on Rails"
+      themes: "Темы"
+      images: "Изображения"
+      values: "Оценки"
+      users: "Пользователи"
+      sign_in: "Войти"
+      sign_up: "Зарегистрироваться"
+      sign_out: "Выйти"
+      account: "Аккаунт"
+      profile: "Моя страница"
+      settings: "Настройки"
+  main:
+    index:
+      welcome: "Добро пожаловать в MyExperteese"
+      proceed: "Приступайте к работе!"
+      signup: "Зарегистрируйтесь!"
+  sessions:
+    new:
+      sign_in: "Вход"
+      email: "Email"
+      password: "Пароль"
+      sign_in_btn: "Войти"
+      new_user: "Новый пользователь?"
+      sign_up_link: "Зарегистрируйтесь сейчас!"
+  users:
+    form:
+      name: "Имя"
+      email: "Email"
+      password: "Пароль"
+      password_confirmation: "Подтверждение пароля"
+      create_account: "Создать аккаунт"
+    show:
+      email: "Email"
+      work: "Рабочая область"
+  work:
+    index:
+      select_theme: "Выберите тему для оценки"
+      default_image: "Вишневый барбус"

@@ -11,8 +11,8 @@ class WorkController < ApplicationController
   # - текущая локаль (для будущей интернационализации)
   def index
     @images_count = Image.all.count
-    @selected_theme = "Выберите тему для оценки"
-    @selected_image_name = 'Вишневый барбус'
+    @selected_theme = t('work.index.select_theme')
+    @selected_image_name = t('work.index.default_image')
     @values_qty = Value.all.count
     @current_locale = I18n.locale
     session[:selected_theme_id] = @selected_theme

@@ -23,5 +23,8 @@ module Myapp
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
+    config.i18n.fallbacks = [:ru]   # если перевода на текущем языке нет – использовать русский
+    config.i18n.enforce_available_locales = true
   end
 end

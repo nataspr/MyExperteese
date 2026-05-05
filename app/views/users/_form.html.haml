@@ -5,19 +5,17 @@
       %ul
         - @user.errors.full_messages.each do |message|
           %li= message
-
   .field
-    = f.label :name, "Имя"
+    = f.label :name, t('users.form.name')
     = f.text_field :name, class: 'form-control'
   .field
-    = f.label :email, "Email"
+    = f.label :email, t('users.form.email')
     = f.email_field :email, class: 'form-control'
   .field
-    = f.label :password, "Пароль"
+    = f.label :password, t('users.form.password')
     = f.password_field :password, class: 'form-control'
   .field
-    = f.label :password_confirmation, "Подтверждение пароля"
+    = f.label :password_confirmation, t('users.form.password_confirmation')
     = f.password_field :password_confirmation, class: 'form-control'
-
   .actions
-    = f.submit "Создать аккаунт", class: "btn btn-primary"
+    = f.submit t('users.form.create_account'), class: "btn btn-primary"
