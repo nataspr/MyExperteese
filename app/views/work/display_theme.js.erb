@@ -11,10 +11,12 @@ if(selectedTheme == "Выберите тему для оценки"|| selectedTh
   $('.img-left-side').css({"display": "none"});
   $('.img-right-side').css({"display": "none"});
   $('.image .image_display .image_diag').css({"display": "none"});
+  $('.rating-panel').hide();
 } else {
   $('.img-left-side').css({"display": "block"});
   $('.img-right-side').css({"display": "block"});
   $('.image .image_display .image_diag').css({"display": "block"});
+  $('.rating-panel').show();
 }
 $('.image_display h2.up-theme').append().html(selectedTheme);
 
@@ -44,6 +46,7 @@ $(".img-center").html('<img alt="Selected Image" src="' + pathImage + '" style="
 $('.image_display').data('current-index', <%= @image_data[:index] %>);
 $('.image_display').data('theme-id', <%= @image_data[:theme_id] %>);
 $('.image_display').data('images-count', <%= @image_data[:images_arr_size] %>);
+$('.image_display').data('current-image-id', oneImageId);
 
 // Функция обновления интерфейса после ответа API
 function updateImageDisplay(data) {
@@ -51,11 +54,35 @@ function updateImageDisplay(data) {
   $(".img-center").html('<img alt="Selected Image" src="' + data.image_url + '" style="width:100%; height:auto;" title="Selected image"/>');
   $('.image_display').data('current-index', data.new_image_index);
   $('.image_display').data('current-image-id', data.image_id);
-  // При необходимости обновление средней оценки
-  if (data.common_ave_value) {
-    $('.common_ave_value').html(data.common_ave_value);
-  }
 }
+
+// функции до обработчиков - получение новых данных из контроллера
+// Функция обновления блока оценок
+function updateRating(data) {
+  $('#average-rating').text(data.common_ave_value);
+  if (data.user_valued === true || data.user_valued === 'true') {
+    $('#user-rating').text(data.value);
+    $('#rating-slider').val(data.value);
+  } else {
+    $('#user-rating').text('не оценено');
+    $('#rating-slider').val(50);
+  }
+  $('.image_display').data('current-image-id', data.image_id);
+}
+
+// первоначальное Обновление оценок
+var avgValue = '<%= @image_data[:common_ave_value] %>';
+var userValued = '<%= @image_data[:user_valued] %>';
+var userValue = '<%= @image_data[:value] %>';
+var imageId = '<%= @image_data[:image_id] %>';
+
+updateRating({
+  common_ave_value: avgValue,
+  user_valued: (userValued === 'true'),
+  value: userValue,
+  image_id: imageId
+});
+
 
 // Обработчик кнопки "Вправо"
 $('.img-right-side').off('click').on('click', function() {
@@ -71,6 +98,7 @@ $('.img-right-side').off('click').on('click', function() {
   }).done(function(data) {
     console.log(data.notice);
     updateImageDisplay(data);
+    updateRating(data);
   }).fail(function(xhr) {
     console.log("Ошибка: " + xhr.responseText);
   });
@@ -90,7 +118,30 @@ $('.img-left-side').off('click').on('click', function() {
   }).done(function(data) {
     console.log(data.notice);
     updateImageDisplay(data);
+    updateRating(data);
   }).fail(function(xhr) {
     console.log("Ошибка: " + xhr.responseText);
+  });
+});
+
+// Сохранение оценки
+$('#save-rating').off('click').on('click', function() {
+  var newValue = $('#rating-slider').val();
+  var imageId = $('.image_display').data('current-image-id'); // из data-атрибута
+  $.ajax({
+    type: "POST",
+    url: "/api/rate_image",
+    data: { image_id: imageId, value: newValue },
+    dataType: 'json'
+  }).done(function(data) {
+    if (data.success) {
+      $('#average-rating').text(data.avg_value);
+      $('#user-rating').text(data.user_value);
+      alert(data.message);
+    } else {
+      alert("Ошибка: " + data.error);
+    }
+  }).fail(function() {
+    alert("Ошибка связи с сервером");
   });
 });

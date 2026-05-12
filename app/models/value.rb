@@ -13,4 +13,9 @@ class Value < ApplicationRecord
       [false, nil]
     end
   end
+
+  # Вычисляет среднюю оценку для изображения 
+  def self.average_value_for_image(image_id)
+    where(image_id: image_id).average(:value).to_f.round # округление до целых
+  end
 end

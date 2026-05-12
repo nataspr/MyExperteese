@@ -21,6 +21,15 @@
           .col-md-10
             .img-center{ title: "Default image" }
               %img{ alt: "Default Image", src: asset_path('pictures/fish1.jpg'), title: "Default image", style: "width:100%; height:100%;" }
+            .rating-panel
+              %p
+                Средняя оценка:
+                %span#average-rating 0
+              %p
+                Ваша оценка:
+                %span#user-rating  не оценено
+              %input#rating-slider{ type: "range", min: 0, max: 100, value: 50, step: 1 }
+              %button#save-rating.btn.btn-sm.btn-primary Сохранить
           .col-md-1
             .img-right-side
               %h3{ title: "list to next image" }

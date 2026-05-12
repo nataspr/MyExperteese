@@ -167,3 +167,16 @@ select#theme {
     background-color: #3b1a5e;
   }
 }
+
+.rating-panel {
+  display: none;  // изначально скрыт
+  margin-top: 20px;
+  text-align: center;
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  input[type=range] {
+    width: 80%;
+    margin: 10px 0;
+  }
+}

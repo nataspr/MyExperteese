@@ -68,6 +68,24 @@ module Api
       end
     end
 
+    #новое для работы с оценкой изображения
+    def rate_image
+      image_id = params[:image_id].to_i
+      value = params[:value].to_i
+      user_id = current_user.id
+
+      # Найти или создать оценку
+      user_value = Value.find_or_initialize_by(user_id: user_id, image_id: image_id)
+      user_value.value = value
+      if user_value.save
+        # Пересчитать среднюю оценку и получить обновлённые данные
+        avg = Value.average_value_for_image(image_id)
+        render json: { success: true, avg_value: avg, user_value: value, message: "Оценка сохранена" }
+      else
+        render json: { success: false, error: "Ошибка сохранения" }, status: 422
+      end
+    end
+
     private
 
     def next_index(index, length)

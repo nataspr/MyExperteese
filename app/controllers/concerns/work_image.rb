@@ -11,6 +11,7 @@ module WorkImage
     image_id = one_image_attr['id']
 
     user_valued, value = Value.user_valued_exists(current_user_id, image_id)
+    avg_value = Value.average_value_for_image(image_id)  # среднее из таблицы values
     values_qty = Value.all.count.round
 
     if user_valued
@@ -31,7 +32,7 @@ module WorkImage
       file: one_image_attr['file'],
       user_valued: user_valued,
       value: value,
-      common_ave_value: common_ave_value
+      common_ave_value: avg_value
     }
   end
 end

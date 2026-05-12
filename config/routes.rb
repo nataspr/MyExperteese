@@ -21,6 +21,7 @@ match 'display_theme', to: 'work#display_theme',  via: :post
   namespace :api do
     get 'next_image', to: 'api#next_image'
     get 'prev_image', to: 'api#prev_image'
+    post 'rate_image', to: 'api#rate_image'
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
